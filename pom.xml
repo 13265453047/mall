@@ -47,6 +47,9 @@
 
                 使用curator-framework 4.2.0剔除包含的zookeeper的jar，并增加zookeeper最新的3.4.10的jar
              -->
+            <!--
+                curator-framework实现了对ZK的CRUD操作
+             -->
             <dependency>
                 <groupId>org.apache.curator</groupId>
                 <artifactId>curator-framework</artifactId>
@@ -65,18 +68,20 @@
             </dependency>
 
             <!--
-                  <dependency>
-                    <groupId>org.apache.curator</groupId>
-                    <artifactId>curator-recipes</artifactId>
-                    <version>${curator.version}</version>
-                    <exclusions>
-                      <exclusion>
+                curator-recipes封装了使用ZK的一些应用场景功能
+                比如：分布式锁、master选举、服务注册、监听机制等
+             -->
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator.version}</version>
+                <exclusions>
+                    <exclusion>
                         <groupId>org.apache.zookeeper</groupId>
                         <artifactId>zookeeper</artifactId>
-                      </exclusion>
-                    </exclusions>
-                  </dependency>
-            -->
+                    </exclusion>
+                </exclusions>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

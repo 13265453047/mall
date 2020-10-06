@@ -21,12 +21,9 @@ import java.util.concurrent.TimeUnit;
  **/
 public class CuratorDemo {
 
-    // zk集群服务器地址
-    private static final String CONNECTION_STR = "192.168.1.11:2181";
-
     public static void main(String[] args) {
         CuratorFramework curatorFramework = CuratorFrameworkFactory.builder()
-                .connectString(CONNECTION_STR)
+                .connectString(ZkConfig.CONNECTION_STR)
                 .connectionTimeoutMs(3000)
                 .sessionTimeoutMs(3000)
                 .retryPolicy(new ExponentialBackoffRetry(1000, 3))
@@ -36,10 +33,10 @@ public class CuratorDemo {
 
         try {
             // 创建临时有序节点
-            for (int i = 0; i < 10; i++) {
-                createNode(curatorFramework);
-                TimeUnit.SECONDS.sleep(3);
-            }
+//            for (int i = 0; i < 10; i++) {
+//                createNode(curatorFramework);
+//                TimeUnit.SECONDS.sleep(3);
+//            }
 
             // 创建节点数据
 //            createNode(curatorFramework);
@@ -48,6 +45,8 @@ public class CuratorDemo {
 //            updateNode(curatorFramework);
             // 删除节点
 //            deleteNode(curatorFramework);
+
+            deleteParentNode(curatorFramework);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,6 +131,16 @@ public class CuratorDemo {
         System.out.println(value);
 
         curatorFramework.delete().withVersion(stat.getVersion()).forPath("/data");
+    }
+
+    /**
+     * 删除节点
+     *
+     * @param curatorFramework
+     * @throws Exception
+     */
+    private static void deleteParentNode(CuratorFramework curatorFramework) throws Exception {
+        curatorFramework.delete().deletingChildrenIfNeeded().forPath("/bruce");
     }
 
 }
