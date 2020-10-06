@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>zk-java-api</module>
+        <module>rpc-demo</module>
     </modules>
 
     <name>mall</name>
@@ -20,8 +21,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+        <lombok.version>1.18.8</lombok.version>
         <curator.version>4.2.0</curator.version>
         <zookeeper.version>3.4.10</zookeeper.version>
+        <netty.version>4.1.33.Final</netty.version>
+        <spring.context.version>4.3.13.RELEASE</spring.context.version>
+
     </properties>
 
     <dependencies>
@@ -35,6 +40,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
 
             <!--
                 由于服务器zookeeper:3.4.10，因为使用curator的版本必须匹配服务器上安装zookeeper的版本。
@@ -66,7 +76,6 @@
                 <artifactId>zookeeper</artifactId>
                 <version>${zookeeper.version}</version>
             </dependency>
-
             <!--
                 curator-recipes封装了使用ZK的一些应用场景功能
                 比如：分布式锁、master选举、服务注册、监听机制等
@@ -81,6 +90,17 @@
                         <artifactId>zookeeper</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.context.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
             </dependency>
 
         </dependencies>
