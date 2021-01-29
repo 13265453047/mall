@@ -11,6 +11,7 @@
     <modules>
         <module>zk-java-api</module>
         <module>rpc-demo</module>
+        <module>thread-study</module>
     </modules>
 
     <name>mall</name>
