@@ -3,11 +3,13 @@ package com.bruce.cas;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicStampedReference;
 
 /**
  * @author rcy
  * @data 2021-01-29 17:49
- * @description 计数器（CAS线程安全计数器和非线程安全计数器）
+ * @description:计数器（CAS线程安全计数器和非线程安全计数器） JVM中的CAS操作正式利用了处理器提供的CMPXCHG指令实现的。
+ * 自旋CAS实现的基本思路就是循环进行CAS操作指导成功为止。
  */
 public class Counter {
 
@@ -45,8 +47,11 @@ public class Counter {
 
         System.out.println("counter.i = " + counter.i);
         System.out.println("counter.atomicI.get() = " + counter.atomicI.get());
+        System.out.println("counter.stampedReference.getReference() = " + counter.stampedReference.getReference());
         System.out.println("System.currentTimeMillis() - start = " + (System.currentTimeMillis() - start));
     }
+
+    private AtomicStampedReference<Integer> stampedReference = new AtomicStampedReference<>(0, 0);
 
     /**
      * 使用CAS实现线程安全计数器
@@ -57,13 +62,24 @@ public class Counter {
 //        atomicI.addAndGet(1);
 //        atomicI.getAndAdd(1);
 
-        for (; ; ) {
-            int i = atomicI.get();
-            boolean suc = atomicI.compareAndSet(i, ++i);
-            if (suc) {
-                break;
-            }
-        }
+
+//        for (; ; ) {
+//            int i = atomicI.get();
+//            boolean suc = atomicI.compareAndSet(i, ++i);
+//            if (suc) {
+//                break;
+//            }
+//        }
+
+            // 待校验，无法保证计数器并行执行
+//        for (; ; ) {
+//            int stamp = stampedReference.getStamp();
+//            int reference = stampedReference.getReference();
+//            boolean suc = stampedReference.compareAndSet(reference, ++reference, stamp, ++stamp);
+//            if (suc) {
+//                break;
+//            }
+//        }
     }
 
     /**
