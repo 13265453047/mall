@@ -10,7 +10,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>zk-java-api</module>
-        <module>rpc-demo</module>
         <module>thread-study</module>
     </modules>
 

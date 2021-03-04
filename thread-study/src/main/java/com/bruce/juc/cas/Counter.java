@@ -1,4 +1,4 @@
-package com.bruce.cas;
+package com.bruce.juc.cas;
 
 import java.util.ArrayList;
 import java.util.List;
