@@ -23,6 +23,10 @@ public class CallableDemo implements Callable<String> {
     @Override
     public String call() throws Exception {
         TimeUnit.SECONDS.sleep(1);
-        return "String1";
+        int a = 1;
+        int b = 3;
+        int result = a + b;
+        System.out.println(result);
+        return String.valueOf(result);
     }
 }
