@@ -16,6 +16,8 @@ public class CallableDemo implements Callable<String> {
         Future<String> submit = service.submit(demo);
 
         System.out.println(submit.get());
+
+        service.shutdown();
     }
 
     @Override
