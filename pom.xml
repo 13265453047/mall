@@ -11,6 +11,8 @@
     <modules>
         <module>zk-java-api</module>
         <module>thread-study</module>
+        <module>spring</module>
+        <module>spring/spring-framework</module>
     </modules>
 
     <name>mall</name>
