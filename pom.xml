@@ -13,6 +13,7 @@
         <module>thread-study</module>
         <module>spring</module>
         <module>spring/spring-framework</module>
+        <module>algorithm-data-structure</module>
     </modules>
 
     <name>mall</name>
@@ -28,7 +29,6 @@
         <zookeeper.version>3.4.10</zookeeper.version>
         <netty.version>4.1.33.Final</netty.version>
         <spring.context.version>4.3.13.RELEASE</spring.context.version>
-
     </properties>
 
     <dependencies>
