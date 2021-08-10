@@ -9,7 +9,6 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.bruce</groupId>
     <artifactId>springboot-rabbitmq-consumer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>springboot-rabbitmq-consumer</name>
