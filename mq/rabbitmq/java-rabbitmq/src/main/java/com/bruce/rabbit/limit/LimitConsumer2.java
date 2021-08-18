@@ -34,7 +34,7 @@ public class LimitConsumer2 extends BaseRabbitMqConnect {
                                        byte[] body) throws IOException {
                 String msg = new String(body, "UTF-8");
                 try {
-                    TimeUnit.SECONDS.sleep(5);
+                    TimeUnit.SECONDS.sleep(2);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -45,7 +45,8 @@ public class LimitConsumer2 extends BaseRabbitMqConnect {
 
         //非自动确认消息的前提下，如果一定数目的消息（通过基于consume或者channel设置Qos的值）未被确认前，不进行消费新的消息。
         // 因为Consumer2的处理速率很慢，收到两条消息后都没有发送ACK，队列不会再发送消息给Consumer2
-        channel.basicQos(2);
+        // prefetchCount:为预先取出的消息数量
+        channel.basicQos(5);
         channel.basicConsume(QUEUE_NAME, false, consumer);
     }
 }

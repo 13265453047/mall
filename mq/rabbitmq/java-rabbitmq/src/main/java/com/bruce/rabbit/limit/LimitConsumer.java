@@ -41,7 +41,7 @@ public class LimitConsumer extends BaseRabbitMqConnect {
         };
 
         //非自动确认消息的前提下，如果一定数目的消息（通过基于consume或者channel设置Qos的值）未被确认前，不进行消费新的消息。
-        channel.basicQos(2);
+        channel.basicQos(10);
         channel.basicConsume(QUEUE_NAME, false, consumer);
     }
 }
