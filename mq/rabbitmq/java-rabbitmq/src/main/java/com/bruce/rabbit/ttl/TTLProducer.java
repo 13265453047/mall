@@ -6,8 +6,6 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -45,7 +43,7 @@ public class TTLProducer extends BaseRabbitMqConnect {
                 .expiration("10000") // TTL
                 .build();
 
-        channel.basicPublish(TTLConsumer.TTL_EXCHANGE, TTLConsumer.BINDING_KEY, null, msg.getBytes());
+        channel.basicPublish(TTLConsumer.TTL_EXCHANGE, TTLConsumer.BINDING_KEY, properties, msg.getBytes());
 
         channel.close();
         connection.close();

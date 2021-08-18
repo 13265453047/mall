@@ -34,10 +34,10 @@ public class DelayPluginConsumer extends BaseRabbitMqConnect {
         channel.exchangeDeclare(DELAY_PLUGIN_EXCHANGE, "x-delayed-message", false, false, argss);
 
 
-        // 声明普通队列，并设置对应的死信交换机参数
+        // 声明队列
         channel.queueDeclare(DELAY_PLUGIN_QUEUE, false, false, false, null);
 
-        // 绑定
+        // 绑定，将x-delayed-message类型的exchange 与 队列进行绑定
         channel.queueBind(DELAY_PLUGIN_QUEUE, DELAY_PLUGIN_EXCHANGE, DELAY_PLUGIN_BINDING_KEY);
 
         // 创建消费者
