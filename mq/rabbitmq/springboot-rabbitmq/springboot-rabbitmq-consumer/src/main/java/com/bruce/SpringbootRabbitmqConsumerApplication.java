@@ -1,7 +1,8 @@
-package com.bruce.mq;
+package com.bruce;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 
 @SpringBootApplication
 public class SpringbootRabbitmqConsumerApplication {
