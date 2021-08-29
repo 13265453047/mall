@@ -10,16 +10,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+import javax.annotation.Resource;
+
 /**
  * @author rcy
  * @data 2021-08-24 21:09
  * @description TODO
  */
 @Configuration
-@PropertySource("classpath:mq.properties")
+//@PropertySource("classpath:mq.properties")
+@PropertySource("classpath:mq-${spring.profiles.active}.properties")
 public class RabbitMqConfig {
 
-    @Value("${com.gupaoedu.firstQueue}")
+    /*@Value("${com.gupaoedu.firstQueue}")
     private String firstQueue;
 
     @Value("${com.gupaoedu.secondQueue}")
@@ -38,7 +41,11 @@ public class RabbitMqConfig {
     private String topicExchange;
 
     @Value("${com.gupaoedu.fanoutexChange}")
-    private String fanoutExchange;
+    private String fanoutExchange;*/
+
+    @Resource
+    private RabbitMqSource mqSource;
+
 
     /**
      * 创建四个队列
@@ -46,22 +53,26 @@ public class RabbitMqConfig {
 
     @Bean("vipFirstQueue")
     public Queue getFirstQueue() {
-        return new Queue(firstQueue);
+//        return new Queue(firstQueue);
+        return new Queue(mqSource.getFirstQueue());
     }
 
     @Bean("vipSecondQueue")
     public Queue getSecondQueue() {
-        return new Queue(secondQueue);
+//        return new Queue(secondQueue);
+        return new Queue(mqSource.getSecondQueue());
     }
 
     @Bean("vipThirdQueue")
     public Queue getThirdQueue() {
-        return new Queue(thirdQueue);
+//        return new Queue(thirdQueue);
+        return new Queue(mqSource.getThirdQueue());
     }
 
     @Bean("vipFourthQueue")
     public Queue getFourthQueue() {
-        return new Queue(fourthQueue);
+//        return new Queue(fourthQueue);
+        return new Queue(mqSource.getFourthQueue());
     }
 
     /**
@@ -69,17 +80,20 @@ public class RabbitMqConfig {
      */
     @Bean("vipDirectExchange")
     public DirectExchange getDirectExchange() {
-        return new DirectExchange(directExchange);
+//        return new DirectExchange(directExchange);
+        return new DirectExchange(mqSource.getDirectExchange());
     }
 
     @Bean("vipTopicExchange")
     public TopicExchange getTopicExchange() {
-        return new TopicExchange(topicExchange);
+//        return new TopicExchange(topicExchange);
+        return new TopicExchange(mqSource.getTopicExchange());
     }
 
     @Bean("vipFanoutExchange")
     public FanoutExchange getFanoutExchange() {
-        return new FanoutExchange(fanoutExchange);
+//        return new FanoutExchange(fanoutExchange);
+        return new FanoutExchange(mqSource.getFanoutExchange());
     }
 
     /**
@@ -108,6 +122,7 @@ public class RabbitMqConfig {
     /**
      * 在消费端转换JSON消息
      * 监听类都要加上containerFactory属性
+     *
      * @param connectionFactory
      * @return
      */

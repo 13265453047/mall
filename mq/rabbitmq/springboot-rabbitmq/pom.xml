@@ -14,9 +14,9 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>springboot-api</module>
         <module>springboot-rabbitmq-provider</module>
         <module>springboot-rabbitmq-consumer</module>
-        <module>springboot-api</module>
     </modules>
 
     <properties>
@@ -45,7 +45,7 @@
             <version>1.2.21</version>
         </dependency>
 
-        <!-- Springboot与jackson有依赖版本问题，  -->
+        <!-- Springboot与jackson有依赖版本问题  -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>

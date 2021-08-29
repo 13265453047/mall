@@ -3,10 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <groupId>com.bruce</groupId>
         <artifactId>springboot-rabbitmq</artifactId>
+        <groupId>com.bruce</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath/>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
