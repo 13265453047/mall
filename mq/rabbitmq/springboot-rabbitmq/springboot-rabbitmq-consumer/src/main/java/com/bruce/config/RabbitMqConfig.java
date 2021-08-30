@@ -4,13 +4,17 @@ import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConversionException;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.amqp.SimpleRabbitListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 import javax.annotation.Resource;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author rcy
@@ -137,6 +141,32 @@ public class RabbitMqConfig {
         factory.setAutoStartup(true);
         return factory;
     }
+
+    /*private static final int DEFAULT_CONCURRENT = 1, DEFAULT_MAX_CONCURRENT = 10, DEFAULT_PREFETCH_COUNT = 15;
+
+    @Bean("rabbitListenerContainerFactory")
+    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(SimpleRabbitListenerContainerFactoryConfigurer configurer, ConnectionFactory connectionFactory) {
+        SimpleRabbitListenerContainerFactory containerFactory = new SimpleRabbitListenerContainerFactory();
+        containerFactory.setPrefetchCount(DEFAULT_PREFETCH_COUNT);
+        containerFactory.setConcurrentConsumers(DEFAULT_CONCURRENT);
+        containerFactory.setMaxConcurrentConsumers(DEFAULT_MAX_CONCURRENT);
+        containerFactory.setDefaultRequeueRejected(false);
+        containerFactory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+        containerFactory.setMessageConverter(new MessageConverter() {
+
+            @Override
+            public Message toMessage(Object o, MessageProperties messageProperties) throws MessageConversionException {
+                return new Message(o.toString().getBytes(StandardCharsets.UTF_8), messageProperties);
+            }
+
+            @Override
+            public Object fromMessage(Message message) throws MessageConversionException {
+                return message;
+            }
+        });
+        configurer.configure(containerFactory, connectionFactory);
+        return containerFactory;
+    }*/
 
 
 }
