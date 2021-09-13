@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 /**
  * Springboot容器初始化过程中
@@ -35,6 +36,25 @@ public class BeanLifecycle implements InitializingBean, CommandLineRunner, BeanP
         log.info(".............AdminMenuInit().......restTemplate:{}", restTemplate);
     }
 
+    @PostConstruct
+    public void postConstruct() {
+        log.info(".............@PostConstruct.......restTemplate:{}", restTemplate);
+    }
+
+    // <bean id="beanLifecycle " class="com.bruce.springbootdemo.init.BeanLifecycle" init-method="initMethod"/>
+    public void initMethod() {
+        log.info(".............initMethod......");
+    }
+
+    public void destroy() {
+        log.info(".............destroy......");
+    }
+
+    @PreDestroy
+    public void preDestroy() {
+        log.info("............. @PreDestroy......");
+    }
+
     /**
      * InitializingBean
      *
@@ -43,11 +63,6 @@ public class BeanLifecycle implements InitializingBean, CommandLineRunner, BeanP
     @Override
     public void afterPropertiesSet() throws Exception {
         log.info(".............InitializingBean ---->  afterPropertiesSet().......restTemplate:{}", restTemplate);
-    }
-
-    @PostConstruct
-    public void postConstruct() {
-        log.info(".............@PostConstruct.......restTemplate:{}", restTemplate);
     }
 
     @Override
