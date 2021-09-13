@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<!--Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，当设置成trace时，你会看到log4j2内部各种详细输出-->
+<!--monitorInterval：Log4j能够自动检测修改配置文件和重新配置本身，设置间隔秒数-->
+<configuration status="WARN" monitorInterval="30">
+    <properties>
+        <!-- 在本地调试的Log路径 home_path="/home/yunyl/files" -->
+        <property name="home_path">/data/yp/log/admin</property>
+    </properties>
+    <appenders>
+        <!-- 输出控制台的配置 -->
+        <console name="mConsole" target="SYSTEM_OUT">
+            <PatternLayout charset="UTF-8" pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%p] - %l - %m%n"/>
+        </console>
+
+        <!-- 日志文件配置-info级别 -->
+        <RollingFile name="logInfo" fileName="${home_path}/info.log" filePattern="${home_path}/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}_%i.log">
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout charset="UTF-8" pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <!-- 同一个文件超过文件设定大小(这里是100MB)后最大存在多少个，默认为7个，超过会覆盖，和%i对应 -->
+            <DefaultRolloverStrategy max="24"/>
+        </RollingFile>
+
+        <!-- 日志文件配置-warn级别 -->
+        <RollingFile name="logWarn" fileName="${home_path}/warn.log" filePattern="${home_path}/$${date:yyyy-MM}/warn-%d{yyyy-MM-dd}_%i.log">
+            <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout charset="UTF-8" pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%p] - %l - %m%n"/>
+            <Policies>
+                <!-- interval=1 是按小时的，如果是按天的话得是24，如果按小时 filePattern 文件后缀为 yyyy-MM-dd-HH-->
+                <TimeBasedTriggeringPolicy modulate="true" interval="24"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <!-- 同一个文件超过文件设定大小(这里是100MB)后最大存在多少个，默认为7个，超过会覆盖，和%i对应 -->
+            <DefaultRolloverStrategy max="24"/>
+        </RollingFile>
+
+        <!-- 日志文件配置-error级别 -->
+        <RollingFile name="logError" fileName="${home_path}/error.log" filePattern="${home_path}/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}_%i.log">
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout charset="UTF-8" pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="24"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="24"/>
+        </RollingFile>
+
+    </appenders>
+
+    <!-- 定义logger，只有定义了logger并引入appender，appender才会生效-->
+    <loggers>
+        <logger name="org.springframework" level="info"/>
+        <logger name="org.mybatis" level="info"/>
+        <root level="info">
+            <appender-ref ref="mConsole"/>
+            <appender-ref ref="logInfo"/>
+            <appender-ref ref="logWarn"/>
+            <appender-ref ref="logError"/>
+        </root>
+    </loggers>
+</configuration>
