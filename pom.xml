@@ -14,6 +14,7 @@
         <module>spring</module>
         <module>algorithm-data-structure</module>
         <module>mq</module>
+        <module>redis</module>
     </modules>
 
     <name>mall</name>
