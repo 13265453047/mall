@@ -50,7 +50,7 @@ public class AuthorizeSecurityInterceptor extends AbstractSecurityInterceptor im
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        log.info("[自定义过滤器]: {}", " LoginSecurityInterceptor.doFilter()");
+        log.info("[自定义过滤器]: {}", " AuthorizeSecurityInterceptor.doFilter()");
         FilterInvocation fi = new FilterInvocation(request, response, chain);
         // 调用父类的 beforeInvocation ==> accessDecisionManager.decide(..)
         InterceptorStatusToken token = super.beforeInvocation(fi);

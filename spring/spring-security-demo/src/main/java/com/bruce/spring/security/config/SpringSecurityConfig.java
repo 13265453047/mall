@@ -8,11 +8,18 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author rcy
@@ -23,8 +30,14 @@ import javax.annotation.Resource;
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * 认证提供者
+     */
     @Resource
     private UserAuthenticationProvider authenticationProvider;
+    /**
+     * 授权拦截器
+     */
     @Resource
     private AuthorizeSecurityInterceptor authorizeSecurityInterceptor;
 
@@ -92,9 +105,28 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider);  // 自定义provider
         auth.eraseCredentials(false);           // 不删除凭据，以便记住用户
+
+        auth.userDetailsService(userDetailsServiceBean()).passwordEncoder(passwordEncoder());
+    }
+
+    @Bean
+    @Override
+    public UserDetailsService userDetailsServiceBean() {
+        Collection<UserDetails> users = buildUsers();
+        return new InMemoryUserDetailsManager(users);
+    }
+
+    private Collection<UserDetails> buildUsers() {
+        String password = passwordEncoder().encode("123456");
+        List<UserDetails> users = new ArrayList<>();
+        UserDetails user_admin = User.withUsername("admin").password(password).authorities("ADMIN", "USER").build();
+        UserDetails user_user1 = User.withUsername("user 1").password(password).authorities("USER").build();
+        users.add(user_admin);
+        users.add(user_user1);
+        return users;
     }
 
     /**
