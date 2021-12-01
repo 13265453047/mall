@@ -13,6 +13,12 @@
     <artifactId>spring</artifactId>
     <name>spring</name>
 
+    <modules>
+        <module>spring-boot-demo</module>
+        <module>spring-security-auth2-demo</module>
+        <module>spring-security-demo</module>
+    </modules>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
