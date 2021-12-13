@@ -29,6 +29,30 @@
             <artifactId>itextpdf</artifactId>
             <version>5.4.2</version>
         </dependency>
+        <!-- html转pdf -->
+
+        <!-- pdf转img -->
+        <!--icepdf，用来将pdf文件转换为图片的依赖-->
+        <dependency>
+            <groupId>org.icepdf.os</groupId>
+            <artifactId>icepdf-core</artifactId>
+            <version>6.1.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.media</groupId>
+                    <artifactId>jai-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.12</version>
+        </dependency>
+        <!-- pdf转img -->
+
 
         <!--<dependency>
             <groupId>com.zbhd</groupId>

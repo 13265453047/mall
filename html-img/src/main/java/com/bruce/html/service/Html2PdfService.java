@@ -39,7 +39,7 @@ public class Html2PdfService {
                     "<body>" +
                     htmlStr +
                     "</body></html>";*/
-            renderer.setDocumentFromString(HtmlStr.getHtmlStr());
+            renderer.setDocumentFromString(htmlStr);
             renderer.layout();
             renderer.createPDF(os);
             renderer.finishPDF();
