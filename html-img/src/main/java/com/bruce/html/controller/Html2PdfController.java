@@ -2,13 +2,15 @@ package com.bruce.html.controller;
 
 import com.bruce.html.handler.AsyncHandler;
 import com.bruce.html.pdf2img.icepdf.ImageUtils;
-import com.bruce.html.pdf2img.pdfbox.PDFToImgUtil;
 import com.bruce.html.utils.FreemarkerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +28,25 @@ public class Html2PdfController {
 
     @Autowired
     private AsyncHandler asyncHandler;
+
+    /**
+     * 将图片写出
+     *
+     * @param response:
+     * @author: rcy
+     * @date: 2021-12-14 09:12:30
+     * @return: void
+     **/
+    @GetMapping
+    public void downloadImg(HttpServletResponse response) throws Exception {
+        BufferedImage img = null;
+        response.setContentType("image/jpeg");
+        response.setDateHeader("expries", -1);
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Pragma", "no-cache");
+        ImageIO.write(img, "png", response.getOutputStream());
+    }
+
 
     @GetMapping
     public void html2Pdf() throws Exception {

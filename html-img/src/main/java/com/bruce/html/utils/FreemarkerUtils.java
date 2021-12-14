@@ -1,5 +1,6 @@
 package com.bruce.html.utils;
 
+import com.bruce.html.HtmlImgApplication;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
@@ -24,8 +25,12 @@ public class FreemarkerUtils {
 
     public static String getTemplate(String template, Map<String, Object> map) throws Exception {
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_25);
-        String templatePath = FreemarkerUtils.class.getResource("/").getPath() + "/templates";
-        cfg.setDirectoryForTemplateLoading(new File(templatePath));
+        // 这种方式再服务器上无法读取
+        // String templatePath = FreemarkerUtils.class.getResource("/").getPath() + "/templates";
+        // cfg.setDirectoryForTemplateLoading(new File(templatePath));
+
+        cfg.setClassForTemplateLoading(HtmlImgApplication.class, "/templates");
+
         cfg.setDefaultEncoding("UTF-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         cfg.setLogTemplateExceptions(false);
