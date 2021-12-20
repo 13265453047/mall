@@ -1,6 +1,7 @@
 package com.bruce.html.handler;
 
 import com.bruce.html.service.Html2PdfService;
+import com.bruce.html.wkhtml.WkHtmlToPdf;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -33,6 +34,26 @@ public class AsyncHandler {
             log.warn("thread error : {}", e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * @param htmlFile : 填充完数据的html文件地址
+     * @return
+     * @throws Exception
+     */
+    public Future<Boolean> wkHtmlToPdf(String htmlFile,String destPath) {
+        WkHtmlToPdf.convert(htmlFile, destPath);
+        return new AsyncResult<>(true);
+
+
+//        String fileName = UUID.randomUUID().toString().replaceAll("-", "") + ".pdf";
+//        try {
+//            html2PdfService.htmlToPdf(html, fileName);
+//            return new AsyncResult<>(true);
+//        } catch (Exception e) {
+//            log.warn("thread error : {}", e.getMessage());
+//            throw e;
+//        }
     }
 
 }
