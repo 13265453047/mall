@@ -16,6 +16,7 @@
         <module>mq</module>
         <module>redis</module>
         <module>html-img</module>
+        <module>netty</module>
     </modules>
 
     <name>mall</name>
@@ -23,9 +24,15 @@
     <url>http://www.example.com</url>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- jdk版本 -->
+        <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <skipTests>true</skipTests>
+        <!-- 编译字符编码 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 输入、输出字符编码 -->
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <lombok.version>1.18.8</lombok.version>
     </properties>
 
