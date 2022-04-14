@@ -1,25 +1,25 @@
 spring:
   shardingsphere:
     datasource:
-      ds_master:
+      master:
         type: com.zaxxer.hikari.HikariDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
         jdbcUrl: jdbc:mysql://192.168.253.131:3306/sharding_jdbc?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
         username: root
         password: 123456
-      ds_slave0:
+      slave0:
         type: com.zaxxer.hikari.HikariDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
         jdbcUrl: jdbc:mysql://192.168.253.128:3306/sharding_jdbc?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
         username: root
         password: 123456
-      ds_slave1:
+      slave1:
         type: com.zaxxer.hikari.HikariDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
         jdbcUrl: jdbc:mysql://192.168.253.129:3306/sharding_jdbc?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
         username: root
         password: 123456
-      names: ds_master,ds_slave0,ds_slave1
+      names: master,slave0,slave1
 
     props:
       #开启SQL显示，默认false
@@ -32,11 +32,11 @@ spring:
 #    sharding:
 #      master-slave-rules:
 #        master:
-#          master-data-source-name: ds_master
-#          slave-data-source-names: ds_slave0,ds_slave1
+#          master-data-source-name: master
+#          slave-data-source-names: slave0, slave1
       # 主库数据源名称
-      master-data-source-name: ds_master
+      master-data-source-name: master
       # 从库数据源名称列表，多个逗号分隔
-      slave-data-source-names: [ds_slave0, ds_slave1]
+      slave-data-source-names: slave0, slave1
   main:
     allow-bean-definition-overriding: true  # 后面创建数据源会覆盖前面创建的数据源
