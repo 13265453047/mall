@@ -1,19 +1,19 @@
 spring:
   shardingsphere:
     datasource:
-      master:
+      ds_master:
         type: com.zaxxer.hikari.HikariDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
         jdbcUrl: jdbc:mysql://192.168.253.131:3306/sharding_jdbc?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
         username: root
         password: 123456
-      slave0:
+      ds_slave0:
         type: com.zaxxer.hikari.HikariDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
         jdbcUrl: jdbc:mysql://192.168.253.128:3306/sharding_jdbc?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
         username: root
         password: 123456
-      slave1:
+      ds_slave1:
         type: com.zaxxer.hikari.HikariDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
         jdbcUrl: jdbc:mysql://192.168.253.129:3306/sharding_jdbc?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
@@ -28,15 +28,15 @@ spring:
       # 读写分离配置
       load-balance-algorithm-type: round_robin
       # 最终的数据源名称 ，这个数据源存储在spring容器中的名字
-      name: dataSource
+      name: ds_ms
 #    sharding:
 #      master-slave-rules:
 #        master:
 #          master-data-source-name: master
 #          slave-data-source-names: slave0,slave1
       # 主库数据源名称
-      master-data-source-name: master
+      master-data-source-name: ds_master
       # 从库数据源名称列表，多个逗号分隔
-      slave-data-source-names: slave0,slave1
+      slave-data-source-names: [ds_slave0, ds_slave1]
   main:
     allow-bean-definition-overriding: true  # 后面创建数据源会覆盖前面创建的数据源
