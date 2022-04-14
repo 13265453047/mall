@@ -19,7 +19,7 @@ spring:
         jdbcUrl: jdbc:mysql://192.168.253.129:3306/sharding_jdbc?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
         username: root
         password: 123456
-      names: master,slave0,slave1
+      names: ds_master,ds_slave0,ds_slave1
 
     props:
       #开启SQL显示，默认false
@@ -32,8 +32,8 @@ spring:
 #    sharding:
 #      master-slave-rules:
 #        master:
-#          master-data-source-name: master
-#          slave-data-source-names: slave0,slave1
+#          master-data-source-name: ds_master
+#          slave-data-source-names: ds_slave0,ds_slave1
       # 主库数据源名称
       master-data-source-name: ds_master
       # 从库数据源名称列表，多个逗号分隔
