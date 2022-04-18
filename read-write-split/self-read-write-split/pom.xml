@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <artifactId>read-write-split</artifactId>
+        <groupId>com.bruce</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.bruce</groupId>
-    <artifactId>shardingsphere-jdbc-springboot-mybatis</artifactId>
+    <artifactId>self-read-write-split</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>shardingsphere-jdbc-springboot-mybatis</name>
-    <description>基于ShardingSphere-JDBC + Spring Boot + MyBatis 实现简单的读写分离。</description>
+    <name>self-read-write-split</name>
 
     <properties>
         <java.version>1.8</java.version>
@@ -27,7 +32,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <!--
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
@@ -36,18 +41,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
-        </dependency>-->
-
-        <!--<dependency>
-            <groupId>org.apache.shardingsphere</groupId>
-            <artifactId>shardingsphere-jdbc-core</artifactId>
-            <version>5.1.0</version>
-        </dependency>-->
-
-        <dependency>
-            <groupId>org.apache.shardingsphere</groupId>
-            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-            <version>4.1.1</version>
         </dependency>
 
         <dependency>
@@ -55,18 +48,13 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.1.0</version>
         </dependency>
-        <!--<dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.1.3</version>
-        </dependency>-->
 
         <!-- 阿里数据库连接池 -->
-        <!--<dependency>
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${alibaba-druid.version}</version>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>mysql</groupId>

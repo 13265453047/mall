@@ -18,6 +18,7 @@
         <module>html-img</module>
         <module>netty</module>
         <module>jvm</module>
+        <module>read-write-split</module>
     </modules>
 
     <name>mall</name>
