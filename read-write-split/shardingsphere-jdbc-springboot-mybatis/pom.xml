@@ -21,6 +21,8 @@
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
         <!-- alibaba-druid版本 -->
         <alibaba-druid.version>1.1.10</alibaba-druid.version>
+        <sharding-jdbc-spring-boot-starter>4.1.1</sharding-jdbc-spring-boot-starter>
+        <mybatis-plus-boot-starter>3.1.0</mybatis-plus-boot-starter>
     </properties>
 
     <dependencies>
@@ -53,13 +55,13 @@
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-            <version>4.1.1</version>
+            <version>${sharding-jdbc-spring-boot-starter}</version>
         </dependency>
 
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.1.0</version>
+            <version>${mybatis-plus-boot-starter}</version>
         </dependency>
         <!--<dependency>
             <groupId>org.mybatis.spring.boot</groupId>
