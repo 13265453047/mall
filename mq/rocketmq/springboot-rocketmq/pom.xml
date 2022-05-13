@@ -15,7 +15,9 @@
     <modules>
         <module>springboot-rocketmq-api</module>
         <module>springboot-rocketmq-producer</module>
-        <module>springboot-rocketmq-consumer</module>
+        <module>springboot-rocketmq-consumer-01</module>
+        <module>springboot-rocketmq-consumer-02</module>
+        <module>springboot-rocketmq-consumer-03</module>
     </modules>
 
     <properties>
