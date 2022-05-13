@@ -4,7 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.apache.rocketmq.spring.support.RocketMQHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +43,24 @@ public class RocketMQProducer {
     /**
      * 发送普通消息
      */
+    public void sendOrder(String topic, String msgBody) {
+        //send spring message
+        rocketMQTemplate.send(topic, MessageBuilder.withPayload(msgBody).build());
+    }
+
+    /**
+     * 发送普通消息
+     */
+    public void sendKey(String topic, String key, String tag, String msgBody) {
+        //send spring message
+        topic = topic + ":" + tag;
+        Message<String> msg = MessageBuilder.withPayload(msgBody).setHeader(RocketMQHeaders.KEYS, key).build();
+        rocketMQTemplate.send(topic, msg);
+    }
+
+    /**
+     * 发送普通消息
+     */
     public void sendMsg(String msgBody) {
         rocketMQTemplate.syncSend("queue_test_topic", MessageBuilder.withPayload(msgBody).build());
     }
@@ -52,7 +72,7 @@ public class RocketMQProducer {
      */
     public void sendConvertAndSend(String msgBody) {
         //send message synchronously
-        rocketMQTemplate.convertAndSend("test-queue_test_topic-1", MessageBuilder.withPayload(msgBody).build());
+        rocketMQTemplate.convertAndSend("queue_test_topic", MessageBuilder.withPayload(msgBody).build());
     }
 
     /**
