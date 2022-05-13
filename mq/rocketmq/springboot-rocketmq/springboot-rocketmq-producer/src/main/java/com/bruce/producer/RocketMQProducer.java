@@ -1,10 +1,10 @@
 package com.bruce.producer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +14,11 @@ import org.springframework.stereotype.Service;
  * @className: RocketMQProducer
  * @date 2022-05-12
  */
+/**
+ * 使用RocketMQ发送三种类型的消息：同步消息、异步消息和单向消息。其中前两种消息是可靠的，因为会有发送是否成功的应答。
+ * 使用RocketMQ来消费接收到的消息。
+ */
+@Slf4j
 @Service
 public class RocketMQProducer {
 
@@ -38,11 +43,13 @@ public class RocketMQProducer {
             @Override
             public void onSuccess(SendResult sendResult) {
                 // 处理消息发送成功逻辑
+                log.info("发送异步消息，处理消息发送成功逻辑");
             }
 
             @Override
             public void onException(Throwable e) {
                 // 处理消息发送异常逻辑
+                log.info("发送异步消息，处理消息发送异常逻辑");
             }
         });
     }
