@@ -28,7 +28,7 @@ class ProducerApplicationTests {
         Order order = new Order();
         order.setOrderMsg("测试订单");
         order.setOrderNo("122222222");
-        producer.sendOrder("queue_test_order_topic", order.toString());
+        producer.sendOrder("queue_test_order_topic", order);
     }
 
     @Test
@@ -85,6 +85,16 @@ class ProducerApplicationTests {
             count--;
             producer.sendTagMsg("你好，中国");
         }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void sendAndReceive() {
+        System.out.println(producer.sendAndReceive("你好，中国"));
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {

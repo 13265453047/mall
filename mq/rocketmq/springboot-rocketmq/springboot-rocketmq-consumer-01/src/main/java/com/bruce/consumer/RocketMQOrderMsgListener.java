@@ -1,5 +1,6 @@
 package com.bruce.consumer;
 
+import com.bruce.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.spring.annotation.ConsumeMode;
@@ -23,7 +24,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RocketMQMessageListener(
         // topic 主题
-        topic = "queue_test_topic",
+        topic = "queue_test_order_topic",
 
         // messageModel 消息模型
         // 默认值 MessageModel.CLUSTERING 集群
@@ -40,7 +41,7 @@ import org.springframework.stereotype.Component;
         // selectorExpression = "tagA",
 
         // consumerGroup 消费者分组
-        consumerGroup = "queue_group_test",
+        consumerGroup = "queue_group_order",
 
         // consumeMode 消费模式
         // 默认值 ConsumeMode.CONCURRENTLY 并行处理
@@ -59,16 +60,11 @@ import org.springframework.stereotype.Component;
         // 默认值 ${rocketmq.name-server:}
         nameServer = "120.79.166.244:9876"
 )
-public class RocketMQMsgListener1 implements RocketMQListener<MessageExt> {
+public class RocketMQOrderMsgListener implements RocketMQListener<Order> {
 
     @Override
-    public void onMessage(MessageExt message) {
-        int queueId = message.getQueueId();
-        String msgId = message.getMsgId();
-
-        byte[] body = message.getBody();
-        String msg = new String(body);
-        log.info("Listener1，接收到消息：queueId->{} msgId->{} content->{}", queueId, msgId, msg);
+    public void onMessage(Order order) {
+        System.out.printf("order -> %s", order);
     }
 
 }

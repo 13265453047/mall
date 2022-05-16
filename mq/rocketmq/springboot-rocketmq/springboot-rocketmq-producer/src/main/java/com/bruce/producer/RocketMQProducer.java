@@ -1,5 +1,6 @@
 package com.bruce.producer;
 
+import com.bruce.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -43,9 +44,9 @@ public class RocketMQProducer {
     /**
      * 发送普通消息
      */
-    public void sendOrder(String topic, String msgBody) {
+    public void sendOrder(String topic, Order order) {
         //send spring message
-        rocketMQTemplate.send(topic, MessageBuilder.withPayload(msgBody).build());
+        rocketMQTemplate.convertAndSend(topic, order);
     }
 
     /**
@@ -121,5 +122,13 @@ public class RocketMQProducer {
         rocketMQTemplate.syncSendOrderly("orderly_topic", MessageBuilder.withPayload(msgBody).build(), "orderId");
     }
 
+    /**
+     * 发送消息并接受应答
+     *
+     * @param msgBody
+     */
+    public String sendAndReceive(String msgBody) {
+        return rocketMQTemplate.sendAndReceive("receive_topic", msgBody, String.class);
+    }
 
 }
