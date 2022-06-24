@@ -1,0 +1,167 @@
+spring:
+  datasource:
+    username: testhw
+    password: HW#te2021st
+    url: jdbc:mysql://120:79:166:244:26999/yp_pxb_sys?autoReconnect=true&failOverReadOnly=false&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2b8
+    # 数据库连接池类别
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5 # 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时
+      min-idle: 10 # 最小连接数
+      max-active: 150 # 最大连接数
+      max-wait: 60000 # 获取连接时最大等待时间，单位毫秒。配置了maxWait之后，缺省启用公平锁，并发效率会有所下降，如果需要可以通过配置useUnfairLock属性为true使用非公平锁。
+      min-evictable-idle-time-millis: 30000 # 一个连接在池中最小生存的时间，单位是毫秒
+      max-evictable-idle-time-millis: 900000
+
+      # 有两个含义：
+      # 1: Destroy线程会检测连接的间隔时间
+      # 2: testWhileIdle的判断依据，详细看testWhileIdle属性的说明
+      # 配置间隔多久才进行一次检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+
+      # 用来检测连接是否有效的sql，要求是一个查询语句。如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会起作用。
+      # validation-query: select 'x'
+      # validationQuery: select 1
+      validation-query: SELECT 1 FROM DUAL # 检测连接是否有效的 SQL语句，为空时以下三个配置均无效
+      test-on-borrow: false # 应用向连接池申请连接时执行validationQuery检测连接是否有效，默认true，开启后会降低性能
+      test-on-return: false # 当应用使用完连接，连接池回收连接时执行validationQuery检测连接是否有效，默认false，开启后会降低性能
+      # 设置从连接池获取连接时是否检查连接有效性，true时，如果连接空闲时间超过minEvictableIdleTimeMillis进行检查，否则不检查;false时，不检查
+      # 应用向连接池申请连接，并且testOnBorrow为false时，连接池将会判断连接是否处于空闲状态，如果是，则验证这条连接是否可用
+      # 应用向连接池申请连接时如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效，默认false，建议开启，不影响性能
+      test-while-idle: true
+
+      # 连接有效性检查的超时时间 1 秒
+      validation-query-timeout: 1
+
+      # 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100
+      # max-open-prepared-statements: 20
+      # max-pool-prepared-statement-per-connection-size: 20
+      # 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭
+      pool-prepared-statements: false
+
+      # Spring 监控，利用aop 对指定接口的执行时间，jdbc数进行记录
+      # aop-patterns: "com.springboot.template.dao.*"
+
+      # 数据库链接超过3分钟开始关闭空闲连接 秒为单位
+      # remove-abandoned-timeout: 1800
+      # 对于长时间不使用的连接强制关闭
+      # remove-abandoned: true
+
+      # 打开后，增强timeBetweenEvictionRunsMillis的周期性连接检查，minIdle内的空闲连接，
+      # 每次检查强制验证连接有效性. 参考：https://github.com/alibaba/druid/wiki/KeepAlive_cn
+      # 连接池中的minIdle数量以内的连接，空闲时间超过minEvictableIdleTimeMillis，则会执行keepAlive操作
+      # keep-alive: true
+
+      # 通过别名的方式配置扩展插件，多个英文逗号分隔，常用的插件有：
+      # 监控统计用的filter:stat
+      # 日志用的filter:log4j
+      # 防御sql注入的filter:wall
+      # filters: stat,wall # 配置扩展插件：stat-监控统计，log4j-日志，wall-防火墙（防止SQL注入），去掉后，监控界面的sql无法统计
+      ########### 启用内置过滤器（第一个 stat必须，否则监控不到SQL）##########
+      # filters: stat,wall,log4j2
+      filters: stat,slf4j
+
+      # 自己配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filter:
+        # 开启druiddatasource的状态监控
+        # 有时候，系统中有些SQL执行很慢，我们希望使用日志记录下来，可以开启Druid的慢SQL记录功能
+        stat:
+          enabled: true # 是否开启 FilterStat，默认true
+          db-type: mysql
+          log-slow-sql: true  # 是否开启 慢SQL 记录，默认false
+          slow-sql-millis: 3000  # 慢 SQL 的标准，默认 3000，单位：毫秒
+          merge-sql: true  # 合并多个连接池的监控数据，默认false
+        # 日志监控，使用slf4j 进行日志输出
+        slf4j:
+          enabled: true
+          statement-log-error-enabled: true
+          statement-create-after-log-enabled: false
+          statement-close-after-log-enabled: false
+          result-set-open-after-log-enabled: false
+          result-set-close-after-log-enabled: false
+        wall:
+          config:
+            multi-statement-allow: true #允许一次执行多条语句
+            none-base-statement-allow: true #允许非基本语句的其他语句
+
+      #基础监控配置
+      ########## 配置WebStatFilter，用于采集web关联监控的数据 ##########
+      # 作用就是统计 web 应用请求中所有的数据库信息，比如 发出的 sql 语句，sql 执行的时间、请求次数、请求的 url 地址、以及seesion 监控、数据库表的访问次数 等等。
+      web-stat-filter:
+        enabled: true
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+        session-stat-enable: true # 开启session统计功能
+        session-stat-max-count: 100  # session的最大个数,默认100
+        url-pattern: /*
+
+      ########## 配置StatViewServlet（监控页面），用于展示Druid的统计信息 ##########
+      stat-view-servlet:
+        enabled: true # 是否开启 StatViewServlet
+        #allow: 127.0.0.1 # 访问监控页面 白名单，默认127.0.0.1
+        #deny: 192.168.56.1 # 访问监控页面 黑名单
+        login-password: admin # 访问监控页面 登陆账号
+        login-username: admin # 访问监控页面 登陆密码
+        reset-enable: false # 不允许清空统计数据,重新计算
+        url-pattern: /druid/* # 访问内置监控页面的路径，内置监控页面的首页是/druid/index.html
+
+
+# 上述配置文件的参数可以在 com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties 和 org.springframework.boot.autoconfigure.jdbc.DataSourceProperties中找到;
+# 可以通过 spring.datasource.druid.filters=stat,wall,log4j ...的方式来启用相应的内置Filter，不过这些Filter都是默认配置。
+# 如果默认配置不能满足需求，可以放弃这种方式，通过配置文件来配置Filter，下面是例子。
+
+# 配置StatFilter
+#  spring.datasource.druid.filter.stat.enabled=true
+#  spring.datasource.druid.filter.stat.db-type=h2
+#  spring.datasource.druid.filter.stat.log-slow-sql=true
+#  spring.datasource.druid.filter.stat.slow-sql-millis=2000
+
+# 配置WallFilter
+#  spring.datasource.druid.filter.wall.enabled=true
+#  spring.datasource.druid.filter.wall.db-type=h2
+#  spring.datasource.druid.filter.wall.config.delete-allow=false
+#  spring.datasource.druid.filter.wall.config.drop-table-allow=false
+
+# 目前为以下 Filter 提供了配置支持，根据（spring.datasource.druid.filter.*）进行配置。
+#  StatFilter
+#  WallFilter
+#  ConfigFilter
+#  EncodingConvertFilter
+#  Slf4jLogFilter
+#  Log4jFilter
+#  Log4j2Filter
+#  CommonsLogFilter
+# 不想使用内置的 Filters，要想使自定义 Filter 配置生效需要将对应 Filter 的 enabled 设置为 true ，Druid Spring Boot Starter 默认禁用 StatFilter，可以将其 enabled 设置为 true 来启用它。
+
+
+# 6 spring 监控
+# 访问之后spring监控默认是没有数据的
+# 1)这需要导入SprngBoot的AOP的Starter
+#  <!--SpringBoot 的aop 模块-->
+#  <dependency>
+#    <groupId>org.springframework.boot</groupId>
+#    <artifactId>spring-boot-starter-aop</artifactId>
+#  </dependency>
+
+# 2)需要在 application.yml 配置:
+# Spring监控AOP切入点，如com.springboot.template.dao.*,配置多个英文逗号分隔
+# spring.datasource.druid.aop-patterns="com.springboot.template.dao.*"
+
+
+# 8 获取 Druid 的监控数据
+# Druid 的监控数据可以在 开启 StatFilter 后 ，通过 DruidStatManagerFacade 进行获取;
+# DruidStatManagerFacade#getDataSourceStatDataList 该方法可以获取所有数据源的监控数据，
+# 除此之外 DruidStatManagerFacade 还提供了一些其他方法，可以按需选择使用。
+#  @RestController
+#  @RequestMapping(value = "/druid")
+#  public class DruidStatController {
+#
+#    @GetMapping("/stat")
+#    public Object druidStat(){
+#      // 获取数据源的监控数据
+#      return DruidStatManagerFacade.getInstance().getDataSourceStatDataList();
+#    }
+#  }
+
+
+
+
