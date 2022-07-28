@@ -22,13 +22,12 @@ public class WeChatPayConstants {
 
     // 商户秘钥：apiclient_key.pem这个文件里面的内容
     public static String PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----\n" +
-            "MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDt48a9MiBZfcpN\n" +
-            "qV1RnCMSDE4kcxzVdqWIBEOG5jG4xQLRiNnC0js2DhL7631hAzsoVV6pNa1UdxXX\n" +
-            "nO/v32abb7QDwPsKgeoHU/IL7VKzABMrNMTwUTPjL8YYludniHmWcxqvEzkk4fNf\n" +
+            "MIIAQDt48a9MiBZfcpN\n" +
+            "qV1Rns2DhL7631hAzsoVV6pNa1UdxXX\n" +
+            "nO/v32ABMrNMTwUTPjL8YYludniHmWcxqvEzkk4fNf\n" +
             "xaW8Al4ZK5xeV4jjOibNI50M5eC5powR6jUlQVgjJHfhKp2mtxSQIgT3Gnw6cs/l\n" +
-            "JiT6rC57E0kmpVQnP8pHxCVZRV8a6cu5OFZc5n2yQU2KsD8Gi71uMucczX6VP2XA\n" +
-            "mYvi9J9OM1kvLza7aoT4GYtPqczmvHpdM5/GvanixN634hMbJm3d0kvHFVnBlv1X\n" +
-            "+xUbSf4HAgMBAAECggEBANyZyySLpWAXvFDEbBtP9V25N4WpkeWJ/vrhKVWhhh5X\n" +
+            "JiT6rC57E0kmpV5OFZc5n2yQU2KsD8Gi71uMucczX6VP2XA\n" +
+            "mYvi9J9OM1kvLXvFDEbBtP9V25N4WpkeWJ/vrhKVWhhh5X\n" +
             "48M3aui1V99KseQXfs9F1cgTUpMLic64F/M4P3Br9JTTw1Vv0dzumH1vJRhWXchM\n" +
             "m3oHl1FbnAhjtwn6dmCWOFqCJw6PfwBq3+vCN2zfrS8eOAVsmy5MMMsu6WaajgjZ\n" +
             "VWRH4fjolyghR/zAxGJ6MeQJ+zcDRPuzr43Z/SsAPbxNg7nWE3fLcewhFi7m5xYU\n" +
