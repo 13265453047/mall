@@ -20,6 +20,7 @@
         <module>jvm</module>
         <module>read-write-split</module>
         <module>java8</module>
+        <module>wechat-pay</module>
     </modules>
 
     <name>mall</name>
