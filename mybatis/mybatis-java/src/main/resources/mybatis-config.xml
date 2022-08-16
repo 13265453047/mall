@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="jdbc.properties"/>
+
+    <typeAliases>
+        <package name="com.bruce.entity"/>
+    </typeAliases>
+
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC"/>
+            <!--<dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password"/>
+            </dataSource>-->
+
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://120.79.166.244:26999/rcy_b2c?autoReconnect=true&amp;failOverReadOnly=false&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;allowMultiQueries=true&amp;serverTimezone=GMT%2b8"/>
+                <property name="username" value="testhw"/>
+                <property name="password" value="te2021st"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!--
+         这种方式下mapper.xml文件如果放在java文件夹下（没再resources下），是不会读取到xml文件
+          需要在pom文件下添加
+          <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+        才会加载xml文件
+         -->
+        <!--<package name="com.bruce.mapper"/>-->
+        <!--
+         **Mapper.xml mapper映射器
+         **Mapper.java mapper接口
+         -->
+        <mapper resource="mapper/IB2bCompanyMemberMapper.xml"/>
+    </mappers>
+</configuration>
