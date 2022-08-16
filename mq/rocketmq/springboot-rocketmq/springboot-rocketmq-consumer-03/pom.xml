@@ -10,10 +10,14 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>springboot-rocketmq-consumer-03</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>springboot-rocketmq-consumer-03</name>
 
     <dependencies>
+        <dependency>
+            <groupId>com.bruce</groupId>
+            <artifactId>springboot-rocketmq-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-spring-boot-starter</artifactId>

@@ -19,7 +19,7 @@ import java.util.List;
 @Repository
 public interface UserMapper extends BaseMapper<User> {
 
-    void addUser(@Param("user") User user);
+    int addUser(@Param("user") User user);
 
     @Select("select * from user")
     List<User> list();
