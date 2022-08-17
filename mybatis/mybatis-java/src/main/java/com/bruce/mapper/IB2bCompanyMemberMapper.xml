@@ -3,6 +3,8 @@
 
 <mapper namespace="com.bruce.mapper.IB2bCompanyMemberMapper">
 
+    <cache/>
+
     <resultMap id="BaseMemberMap" type="com.bruce.entity.B2bCompanyMember">
         <id property="id" column="id"/>
         <result property="companyId" column="company_id"/>

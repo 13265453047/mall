@@ -4,6 +4,14 @@
 <configuration>
     <properties resource="jdbc.properties"/>
 
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+        <!--关闭二级缓存-->
+        <!--<setting name="localCacheScope" value="STATEMENT" />-->
+        <!--关闭一级缓存-->
+        <setting name="cacheEnabled" value="false" />
+    </settings>
+
     <typeAliases>
         <package name="com.bruce.entity"/>
     </typeAliases>
@@ -58,8 +66,8 @@
         -->
 
         <!-- 使用以下两种方式，以接口的形式注册映射器，需要将接口与xml文件放在同一个包下 -->
-        <!--<package name="com.bruce.mapper"/>-->
-        <mapper class="com.bruce.mapper.IB2bCompanyMemberMapper"/>
-        <mapper class="com.bruce.mapper.SysUserMapper"/>
+        <package name="com.bruce.mapper"/>
+        <!--<mapper class="com.bruce.mapper.IB2bCompanyMemberMapper"/>
+        <mapper class="com.bruce.mapper.SysUserMapper"/>-->
     </mappers>
 </configuration>
