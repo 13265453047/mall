@@ -29,7 +29,10 @@ public class App {
         int delUser = userMapper.deleteById(96L);
         System.out.println("删除SysUser:" + delUser);
 
+        // 一个方法中有多个操作，是一个事务（同一个SqlSession对象/Executor/Transaction/Connection）
+        // 故事务就是这样操作的
         sqlSession.commit();
+
         sqlSession.close();
         in.close();
     }
