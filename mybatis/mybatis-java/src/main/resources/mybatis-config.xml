@@ -28,6 +28,10 @@
         与
         <mapper class="com.bruce.mapper.IB2bCompanyMemberMapper"/>
         这两种形式需要将mapper.xml 文件放入接口同级目录下
+
+        T mapper = sqlSession.getMapper(T.class);
+        这个操作会生成一个MapperProxy代理对象，会通过接口全限定名找到已经加载进来的mapper.xml(mapper映射器文件)进行绑定
+        在调用接口方法时，会根据接口方法和参数以及返回值（映射器_id）找到相应的执行方法（MapperStatement：mapper.xml文件中的增删改查每个标签都会封装成一个MapperStatement对象）
      -->
     <mappers>
         <!--
