@@ -2,6 +2,7 @@ package com.bruce;
 
 import com.bruce.entity.B2bCompanyMember;
 import com.bruce.mapper.IB2bCompanyMemberMapper;
+import com.bruce.mapper.SysUserMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -22,9 +23,13 @@ public class App {
 
         IB2bCompanyMemberMapper mapper = sqlSession.getMapper(IB2bCompanyMemberMapper.class);
         List<B2bCompanyMember> members = mapper.findAllMember();
-
         System.out.println(members);
 
+        SysUserMapper userMapper = sqlSession.getMapper(SysUserMapper.class);
+        int delUser = userMapper.deleteById(96L);
+        System.out.println("删除SysUser:" + delUser);
+
+        sqlSession.commit();
         sqlSession.close();
         in.close();
     }

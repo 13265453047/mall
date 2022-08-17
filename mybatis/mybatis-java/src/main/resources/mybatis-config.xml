@@ -20,6 +20,15 @@
         </environment>
     </environments>
 
+    <!--
+        注册mapper映射器，其实就是注册mapper.xml文件。
+        <mapper resource="mapper/IB2bCompanyMemberMapper.xml"/>会直接加载xml文件映射器
+
+        <package name="com.bruce.mapper"/>
+        与
+        <mapper class="com.bruce.mapper.IB2bCompanyMemberMapper"/>
+        这两种形式需要将mapper.xml 文件放入接口同级目录下
+     -->
     <mappers>
         <!--
          这种方式下mapper.xml文件如果放在java文件夹下（没再resources下），是不会读取到xml文件
@@ -39,6 +48,14 @@
          **Mapper.xml mapper映射器
          **Mapper.java mapper接口
          -->
+        <!--
         <mapper resource="mapper/IB2bCompanyMemberMapper.xml"/>
+        <mapper resource="mapper/SysUserMapper.xml"/>
+        -->
+
+        <!-- 使用以下两种方式，以接口的形式注册映射器，需要将接口与xml文件放在同一个包下 -->
+        <!--<package name="com.bruce.mapper"/>-->
+        <mapper class="com.bruce.mapper.IB2bCompanyMemberMapper"/>
+        <mapper class="com.bruce.mapper.SysUserMapper"/>
     </mappers>
 </configuration>
