@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bruce.mapper.IB2bCompanyMemberMapper">
+
+    <resultMap id="BaseMemberMap" type="com.bruce.entity.B2bCompanyMember">
+        <id property="id" column="id"/>
+        <result property="companyId" column="company_id"/>
+        <result property="username" column="username"/>
+        <result property="mobile" column="mobile"/>
+    </resultMap>
+
+    <select id="findAllMember" resultMap="BaseMemberMap">
+        select * from `b2b_company_member`
+    </select>
+
+</mapper>

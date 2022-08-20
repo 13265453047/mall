@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="jdbc.properties"/>
+
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+        <!--关闭二级缓存-->
+        <!--<setting name="localCacheScope" value="STATEMENT" />-->
+        <!--关闭一级缓存-->
+        <setting name="cacheEnabled" value="false" />
+    </settings>
+
+    <typeAliases>
+        <package name="com.bruce.entity"/>
+    </typeAliases>
+
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--
+        注册mapper映射器，其实就是注册mapper.xml文件。
+        <mapper resource="mapper/IB2bCompanyMemberMapper.xml"/>会直接加载xml文件映射器
+
+        <package name="com.bruce.mapper"/>
+        与
+        <mapper class="com.bruce.mapper.IB2bCompanyMemberMapper"/>
+        这两种形式需要将mapper.xml 文件放入接口同级目录下
+
+        T mapper = sqlSession.getMapper(T.class);
+        这个操作会生成一个MapperProxy代理对象，会通过接口全限定名找到已经加载进来的mapper.xml(mapper映射器文件)进行绑定
+        在调用接口方法时，会根据接口方法和参数以及返回值（映射器_id）找到相应的执行方法（MapperStatement：mapper.xml文件中的增删改查每个标签都会封装成一个MapperStatement对象）
+     -->
+    <mappers>
+        <!--
+         这种方式下mapper.xml文件如果放在java文件夹下（没再resources下），是不会读取到xml文件
+          需要在pom文件下添加
+          <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+        才会加载xml文件
+         -->
+        <!--<package name="com.bruce.mapper"/>-->
+        <!--
+         **Mapper.xml mapper映射器
+         **Mapper.java mapper接口
+         -->
+        <!--
+        <mapper resource="mapper/IB2bCompanyMemberMapper.xml"/>
+        <mapper resource="mapper/SysUserMapper.xml"/>
+        -->
+
+        <!-- 使用以下两种方式，以接口的形式注册映射器，需要将接口与xml文件放在同一个包下 -->
+        <package name="com.bruce.mapper"/>
+        <!--<mapper class="com.bruce.mapper.IB2bCompanyMemberMapper"/>
+        <mapper class="com.bruce.mapper.SysUserMapper"/>-->
+    </mappers>
+</configuration>
