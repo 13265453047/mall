@@ -156,6 +156,7 @@ public interface ObjectFactory<T> {
 #########################################################
 
 # 为什么要用三级缓存，两级缓存不可以吗？
+https://blog.csdn.net/lzb348110175/article/details/125086262
 https://www.jb51.net/article/206470.htm
 
 1. 在构造Bean对象之后，将对象提前曝光到缓存中，这时候曝光的对象仅仅是构造完成，还没注入属性和初始化。
