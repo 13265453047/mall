@@ -166,12 +166,13 @@ https://www.jb51.net/article/206470.htm
 
 如果创建的Bean有对应的代理，那其他对象注入时，注入的应该是对应的代理对象；但是Spring无法提前知道这个对象是不是有循环依赖的情况，而正常情况下（没有循环依赖情况），Spring都是在创建好完成品Bean之后才创建对应的代理。这时候Spring有两个选择：
 
-+ 不管有没有循环依赖，都提前创建好代理对象，并将代理对象放入缓存，出现循环依赖时，其他对象直接就可以取到代理对象并注入。
++ 不管有没有循环依赖，都提前创建好代理对象，并将代理对象放入缓存，出现循环依赖时，其他对象直接就可以取到代理对象并注入。（仅一级缓存就可以解决）
 + 不提前创建好代理对象，在出现循环依赖被其他对象注入时，才实时生成代理对象。这样在没有循环依赖的情况下，Bean就可以按着Spring设计原则的步骤来创建。
 
 Spring选择了第二种方式，那怎么做到提前曝光对象而又不生成代理呢？
 Spring就是在对象外面包一层ObjectFactory，提前曝光的是ObjectFactory对象，在被注入时才在ObjectFactory.getObject方式内实时生成代理对象，并将生成好的代理对象放入到第二级缓存Map<String, Object> earlySingletonObjects。
 为了防止对象在后面的初始化（init）时重复代理，在创建代理时，earlyProxyReferences缓存会记录已代理的对象。
+删除三级缓存，放入二级缓存（也是为了多次被循环依赖注入使用，只创建一次，同一个对象）
 
 4. 注入属性和初始化
 
@@ -181,6 +182,13 @@ Spring就是在对象外面包一层ObjectFactory，提前曝光的是ObjectFact
 
 5. 放入已完成创建的单例缓存
 最终通过addSingleton方法将最终生成的可用的Bean放入到单例缓存里。
+
+org.springframework.beans.factory.support.AbstractBeanFactory.getBean(java.lang.String)
+org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(java.lang.String, org.springframework.beans.factory.ObjectFactory<?>)
+org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(java.lang.String, org.springframework.beans.factory.support.RootBeanDefinition, java.lang.Object[])
+org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.addSingletonFactory
+org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getEarlyBeanReference
+org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.addSingleton
 
 ---
 Sping选择了第二种，如果是第一种，就会有以下不同的处理逻辑：
@@ -204,6 +212,9 @@ Sping选择了第二种，如果是第一种，就会有以下不同的处理逻
 ---
 
 
+https://www.zhihu.com/question/445446018
+https://zhuanlan.zhihu.com/p/496273636
+https://zhuanlan.zhihu.com/p/358802637
 
 
 
