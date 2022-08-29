@@ -26,6 +26,16 @@ public class RibbonConfiguration {
 
     @Bean
     public IRule ribbonRule(IClientConfig clientConfig) {
+//        //随机
+//        new RandomRule();
+//        //轮询
+//        new RoundRobinRule();
+//        //权重
+//        new WeightedResponseTimeRule();
+//        //最小并发
+//        new BestAvailableRule();
+//        //区域感知——就近原则
+//        new ZoneAvoidanceRule();
         return new AvailabilityFilteringRule();
     }
 }
