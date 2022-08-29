@@ -15,8 +15,8 @@ public class ConsumerApplication {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    // @DubboReference(version = "1.0.0", interfaceClass = DemoService.class)
-    @DubboReference(version = "1.0.0", url = "dubbo://127.0.0.1:20880")
+    @DubboReference(version = "1.0.0", interfaceClass = DemoService.class)
+//    @DubboReference(version = "1.0.0", url = "dubbo://127.0.0.1:20880")
     private DemoService demoService;
 
     public static void main(String[] args) {
