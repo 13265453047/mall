@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: ribbon-test
+
+server:
+  port: 8080
+
+user-server:
+  ribbon:
+    eureka:
+      enabled: false
+    listOfServers: localhost:8088,localhost:8083
+    ServerListRefreshInterval: 5000
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule
+    NFLoadBalancerPingClassName: com.netflix.loadbalancer.PingUrl
+
+
+logging:
+  level:
+    com.netflix.loadbalancer.BaseLoadBalancer: debug
