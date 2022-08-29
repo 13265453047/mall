@@ -7,12 +7,15 @@ server:
 
 user-server:
   ribbon:
+    eager-load:
+      enabled: true # 开启饥饿加载
     eureka:
       enabled: false
     listOfServers: localhost:8088,localhost:8083
     ServerListRefreshInterval: 5000
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule # 负载均衡规则
     NFLoadBalancerPingClassName: com.netflix.loadbalancer.PingUrl
+
 
 
 logging:
