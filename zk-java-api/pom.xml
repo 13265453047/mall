@@ -8,12 +8,9 @@
         <groupId>com.bruce</groupId>
         <artifactId>mall</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath/>
     </parent>
 
-    <groupId>com.bruce</groupId>
     <artifactId>zk-java-api</artifactId>
-    <version>1.0-SNAPSHOT</version>
 
     <name>zk-java-api</name>
     <!-- FIXME change it to the project's website -->

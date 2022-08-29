@@ -23,14 +23,9 @@
         <module>wechat-pay</module>
         <module>mybatis</module>
         <module>me-dubbo</module>
-        <module>me-dubbo/dubbo-java-demo</module>
-        <module>me-dubbo/spring-boot-dubbo</module>
-        <module>me-dubbo/spring-boot-dubbo/spring-boot-dubbo-api</module>
     </modules>
 
     <name>mall</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
 
     <properties>
         <!-- jdk版本 -->

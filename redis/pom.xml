@@ -4,14 +4,15 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.bruce</groupId>
+  <parent>
+    <groupId>com.bruce</groupId>
+    <artifactId>mall</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
   <artifactId>redis</artifactId>
   <packaging>pom</packaging>
-  <version>1.0-SNAPSHOT</version>
 
   <name>redis</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
 
   <modules>
     <module>springboot-redis</module>

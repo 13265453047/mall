@@ -7,7 +7,6 @@
         <artifactId>mall</artifactId>
         <groupId>com.bruce</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath/>
     </parent>
     <packaging>pom</packaging>
     <artifactId>spring</artifactId>
@@ -17,6 +16,7 @@
         <module>spring-boot-demo</module>
         <module>spring-security-auth2-demo</module>
         <module>spring-security-demo</module>
+        <module>spring-cloud-demo</module>
     </modules>
 
     <properties>
