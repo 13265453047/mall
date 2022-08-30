@@ -14,11 +14,10 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class RibbonConfig {
 
-    @Bean
-    @LoadBalanced
+    /*@Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
-    }
+    }*/
 
     // org.springframework:spring-webflux:5.1.5.RELEASE
     /*@Bean

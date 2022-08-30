@@ -1,13 +1,13 @@
 server:
   port: 8080
 
-user-server:
+spring-cloud-ribbon-user:
   ribbon:
     eager-load:
       enabled: true # 开启饥饿加载
     eureka:
       enabled: false
-    listOfServers: localhost:8088,localhost:8083
+    listOfServers: localhost:8081,localhost:8082
     ServerListRefreshInterval: 5000
 #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule # 负载均衡规则
 #    NFLoadBalancerPingClassName: com.netflix.loadbalancer.PingUrl
