@@ -21,7 +21,7 @@ import org.springframework.web.client.RestTemplate;
 //@RibbonClients(
 //        {@RibbonClient(name = "user-server", configuration = RibbonConfiguration.class)}
 //)
-@RibbonClient(name = "spring-cloud-ribbon-user", configuration = RibbonConfiguration.class)
+// @RibbonClient(name = "spring-cloud-ribbon-user", configuration = RibbonConfiguration.class)
 public class HelloClient {
 
     @LoadBalanced

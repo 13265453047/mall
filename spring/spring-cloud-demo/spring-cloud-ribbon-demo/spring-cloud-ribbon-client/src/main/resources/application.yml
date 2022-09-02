@@ -9,6 +9,7 @@ spring-cloud-ribbon-user:
       enabled: false
     listOfServers: localhost:8081,localhost:8082
     ServerListRefreshInterval: 5000
+    NFLoadBalancerRuleClassName: com.bruce.ribbon.rule.MyRule
 #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule # 负载均衡规则
 #    NFLoadBalancerPingClassName: com.netflix.loadbalancer.PingUrl
 
