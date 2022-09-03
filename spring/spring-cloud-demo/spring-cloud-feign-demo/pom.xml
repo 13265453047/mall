@@ -22,6 +22,11 @@
     </modules>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <!-- 引入OpenFeign的依赖，底层支持OkHttp -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
