@@ -1,9 +1,7 @@
-package com.bruce.ribbon.rule;
+package com.bruce.feign.api.rule;
 
 import com.netflix.client.config.IClientConfig;
 import com.netflix.loadbalancer.AbstractLoadBalancerRule;
-import com.netflix.loadbalancer.ILoadBalancer;
-import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.Server;
 
 import java.util.List;

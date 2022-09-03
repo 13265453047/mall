@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @className: UserApi
  * @date 2022-08-29
  */
-@FeignClient(name = "user-service")
+@FeignClient(name = "spring-cloud-feign-service")
 public interface UserApi {
 
     @PostMapping("/api/say/hello/{name}")

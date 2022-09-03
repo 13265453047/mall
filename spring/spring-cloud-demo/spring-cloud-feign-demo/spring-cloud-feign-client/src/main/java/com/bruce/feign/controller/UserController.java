@@ -2,8 +2,8 @@ package com.bruce.feign.controller;
 
 import com.bruce.feign.api.service.UserApi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -18,7 +18,7 @@ public class UserController {
     @Autowired
     private UserApi userApi;
 
-    @PostMapping("/hello/{name}")
+    @GetMapping("/hello/{name}")
     public String sayHello(@PathVariable("name") String name) {
         return userApi.sayHello(name);
     }
