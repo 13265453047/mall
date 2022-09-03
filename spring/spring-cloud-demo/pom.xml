@@ -15,6 +15,7 @@
     <modules>
         <module>spring-cloud-ribbon-demo</module>
         <module>spring-cloud-feign-demo</module>
+        <module>spring-cloud-eureka-demo</module>
     </modules>
 
     <properties>
