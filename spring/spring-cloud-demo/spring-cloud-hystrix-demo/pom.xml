@@ -13,6 +13,9 @@
     <name>spring-cloud-hystrix-demo</name>
 
     <packaging>pom</packaging>
+    <modules>
+        <module>spring-cloud-hystrix-service</module>
+    </modules>
 
     <dependencies>
         <dependency>
