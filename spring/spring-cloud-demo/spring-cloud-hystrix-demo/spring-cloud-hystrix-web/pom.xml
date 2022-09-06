@@ -7,14 +7,13 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>spring-cloud-hystrix-service</artifactId>
+    <artifactId>spring-cloud-hystrix-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>com.bruce.hystrix</groupId>
             <artifactId>spring-cloud-hystrix-api</artifactId>
@@ -61,7 +60,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.3.12.RELEASE</version>
                 <configuration>
-                    <mainClass>com.bruce.hystrix.SpringCloudHystrixServiceApplication</mainClass>
+                    <mainClass>com.bruce.hystrix.SpringCloudHystrixWebApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
