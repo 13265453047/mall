@@ -2,6 +2,7 @@ package com.bruce.hystrix.client;
 
 import com.bruce.hystrix.service.OrderApi;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,12 @@ public class HystrixCommonController {
     private OrderApi orderApi;
 
     @HystrixCommand(
+            commandProperties = {
+                    @HystrixProperty(name = "circuitBreaker.enabled", value = "true"),
+                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "20"),
+                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000"),
+                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50"),
+            },
             fallbackMethod = "getOrderFallback"
     )
     @GetMapping("order/{orderNo}")
