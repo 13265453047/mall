@@ -1,5 +1,6 @@
 package com.bruce.hystrix.client;
 
+import com.bruce.hystrix.dto.OrderDto;
 import com.bruce.hystrix.service.OrderApi;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,4 +17,11 @@ public class OrderClient implements OrderApi {
     public String order(String orderNo) {
         return "OrderNo: " + orderNo;
     }
+
+    @Override
+    public int addOrder(OrderDto dto) {
+        System.out.println("新增订单：" + dto.toString());
+        return 1;
+    }
+
 }

@@ -17,6 +17,7 @@
         <module>spring-cloud-hystrix-api</module>
         <module>spring-cloud-hystrix-service</module>
         <module>spring-cloud-hystrix-web</module>
+        <module>spring-cloud-hystrix-dashboard</module>
     </modules>
 
     <dependencies>
@@ -27,6 +28,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 

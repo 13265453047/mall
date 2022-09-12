@@ -6,6 +6,7 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 
 //@EnableHystrix
+// 开启熔断
 @EnableCircuitBreaker
 @SpringBootApplication
 public class SpringCloudHystrixWebApplication {

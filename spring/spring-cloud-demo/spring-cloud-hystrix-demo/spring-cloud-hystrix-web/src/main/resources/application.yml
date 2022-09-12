@@ -1,0 +1,53 @@
+
+
+
+#通过 OpenFeign 使用 Hystirx 需要通过配置文件的形式进行配置，无法使用 @HystrixCommand 注解的形式在方法层面进行配置
+
+# 如果使用feign进行远程调用，需要通过该配置开启 feign 与 hystrix 关联的开关，才会触发相应的降级服务
+feign:
+  hystrix:
+    enabled: true
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+
+hystrix:
+  command:
+    default: # default表示全局配置；如果针对某个方法配置，feignclient#method(param)
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+    OrderApi#addOrder(OrderDto): # 针对接口方法进行配置
+      execution:
+        isolation:
+          strategy: SEMAPHORE # THREAD, SEMAPHORE
+          semaphore:
+            maxConcurrentRequests: 10 # 最大请求数量
+    OrderApi#order(): # 针对接口方法进行配置
+      execution:
+        isolation:
+          strategy: THREAD # THREAD, SEMAPHORE
+          thread:
+            interruptOnTimeout: 10
+            interruptOnFutureCancel: 10
+  # 设置线程资源（线程池隔离才会有作用）
+  threadpool:
+    spring-cloud-hystrix-service: #针对具体的服务资源设置线程池资源配置
+      coreSize: 2
+      maxQueueSize: 1000
+      queueSizeRejectionThreshold: 800 #队列大小超过多少的时候拒绝请求，拒绝的阈值
+
+## 使用 openFeign 会使用 Ribbon，需要设置 Ribbon的超时时间（应大于Hystrix的时间），否则 hystrix 还未超时时，ribbon就已经超时了，然后也会进入服务降级处理
+ribbon:
+    ReadTimeout: 10000
+    ConnectTimeout: 10000
+
+management:
+  endpoint:
+    web:
+      exposure:
+        include: refresh,hystrix.stream
