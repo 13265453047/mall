@@ -46,8 +46,14 @@ ribbon:
     ReadTimeout: 10000
     ConnectTimeout: 10000
 
+#management:
+#  endpoint:
+#    web:
+#      exposure:
+#        include: "refresh","hystrix.stream"
+#暴露全部的监控信息
 management:
-  endpoint:
+  endpoints:
     web:
       exposure:
-        include: refresh,hystrix.stream
+        include: "*"

@@ -1,0 +1,14 @@
+management:
+  endpoints: #对所有端点
+    enabled-by-default: true  #默认开启所有监控端点true
+    web:
+      exposure:
+        include: '*' # 以web方式暴露所有端点
+
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: localhost
+#  或者
+#hystrix:
+#  dashboard:
+#    proxy-stream-allow-list: *

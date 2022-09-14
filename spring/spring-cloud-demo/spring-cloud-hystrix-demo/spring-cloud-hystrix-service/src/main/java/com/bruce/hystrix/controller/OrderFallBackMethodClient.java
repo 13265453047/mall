@@ -1,4 +1,4 @@
-package com.bruce.hystrix.client;
+package com.bruce.hystrix.controller;
 
 import com.bruce.hystrix.service.OrderFallBackMethodApi;
 import org.springframework.web.bind.annotation.RestController;

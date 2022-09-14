@@ -1,4 +1,4 @@
-package com.bruce.hystrix.client;
+package com.bruce.hystrix.controller;
 
 import com.bruce.hystrix.dto.OrderDto;
 import com.bruce.hystrix.service.OrderApi;

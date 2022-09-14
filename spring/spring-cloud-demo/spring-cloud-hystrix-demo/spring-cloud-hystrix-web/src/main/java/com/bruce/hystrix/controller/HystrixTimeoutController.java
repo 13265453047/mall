@@ -1,4 +1,4 @@
-package com.bruce.hystrix.client;
+package com.bruce.hystrix.controller;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
@@ -37,7 +37,7 @@ public class HystrixTimeoutController {
             },
             fallbackMethod = "getOrderFallback"
     )
-        @GetMapping("timeout/{orderNo}")
+    @GetMapping("timeout/{orderNo}")
     public String getOrder(@NotBlank(message = "订单编号不能为空") @PathVariable("orderNo") int orderNo) {
         if (orderNo % 2 == 0) {
             return "success order";
