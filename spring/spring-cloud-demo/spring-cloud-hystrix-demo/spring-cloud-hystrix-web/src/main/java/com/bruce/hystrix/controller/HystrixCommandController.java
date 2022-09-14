@@ -1,6 +1,6 @@
 package com.bruce.hystrix.controller;
 
-import com.bruce.hystrix.annotation.GpHystrixCommand;
+import com.bruce.hystrix.service.HystrixCommandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,23 +18,15 @@ import javax.validation.constraints.NotBlank;
  */
 @RestController
 @RequestMapping("hystrix")
-public class GpHystrixCommandController {
+public class HystrixCommandController {
 
     @Autowired
     private RestTemplate restTemplate;
 
-    @GpHystrixCommand(
-            timeout = 2000,
-            fallbackMethod = "getOrderFallback"
-    )
-    @GetMapping("defined/timeout/{orderNo}")
+    @GetMapping("command/{orderNo}")
     public String getOrder(@NotBlank(message = "订单编号不能为空") @PathVariable("orderNo") int orderNo) {
-        return restTemplate.getForObject("http://localhost:7071/api/order/" + orderNo, String.class);
+        HystrixCommandService commandService = new HystrixCommandService(orderNo, restTemplate);
+        return commandService.execute();
     }
-
-    public String getOrderFallback(int orderNo) {
-        return "请求超时 -> " + orderNo;
-    }
-
 
 }

@@ -22,10 +22,10 @@ import javax.validation.constraints.NotBlank;
 @FeignClient(name = "spring-cloud-hystrix-service", fallback = OrderApi.OrderApiHystrix.class)
 public interface OrderApi {
 
-    @GetMapping("/order/{orderNo}")
+    @GetMapping("api/order/{orderNo}")
     String order(@NotBlank(message = "订单编号不能为空") @PathVariable("orderNo") String orderNo);
 
-    @PostMapping("order/add")
+    @PostMapping("api/order/add")
     int addOrder(@RequestBody OrderDto dto);
 
     @Component
