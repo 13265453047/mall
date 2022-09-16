@@ -5,7 +5,7 @@ import java.lang.annotation.*;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface GpHystrixCommand {
+public @interface MeHystrixCommand {
 
     /**
      * 超时时间，默认1000毫秒
@@ -19,6 +19,6 @@ public @interface GpHystrixCommand {
      *
      * @return
      */
-    String fallbackMethod() default "";
+    String fallback() default "";
 
 }
