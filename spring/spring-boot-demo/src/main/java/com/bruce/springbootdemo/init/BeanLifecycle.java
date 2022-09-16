@@ -22,7 +22,7 @@ import javax.annotation.PreDestroy;
  * @date 2021/9/13 11:24
  */
 @Slf4j
-@Component
+// @Component
 public class BeanLifecycle implements InitializingBean, CommandLineRunner, BeanPostProcessor {
 
     /**
