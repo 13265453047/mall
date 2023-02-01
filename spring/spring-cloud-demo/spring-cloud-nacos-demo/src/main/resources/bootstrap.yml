@@ -1,0 +1,47 @@
+spring:
+  profiles:
+    active: dev
+
+---
+#开发环境
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 120.79.166.244:8848
+        namespace: e20d1b70-b083-4fdd-bb59-b00e0c855c48
+
+#        shared-configs:
+#          - data-id: pxb-saas-platform-service-config.yaml # 配置文件名-Data Id
+#            group: PEARL_GROUP   # 默认为DEFAULT_GROUP
+#            refresh: true   # 是否动态刷新，默认为false
+
+#        shared-dataids: pxb-saas-common.properties,pxb-saas-platform-service-config.properties
+#        refreshable-dataids: pxb-saas-common.properties,pxb-saas-platform-service-config.properties
+
+#        extension-configs:
+#          - data-id: pxb-saas-platform-service-config.properties
+#            group: DEFAULT_GROUP
+#            refresh: true
+#        - data-id: pxb-saas-common.properties
+#            group: DEFAULT_GROUP
+#            refresh: true
+
+#        ext-config[0]:
+#          data-id: pxb-saas-platform-config.properties
+#          group: DEFAULT_GROUP
+#          refresh: true
+#        ext-config[1]:
+#          data-id: pxb-saas-common.properties
+#          group: DEFAULT_GROUP
+#          refresh: true
+---
+#测试环境
+spring:
+  profiles: test
+  cloud:
+    nacos:
+      config:
+        server-addr: 120.79.166.244:8848
+        namespace: e20d1b70-b083-4fdd-bb59-b00e0c855c48
