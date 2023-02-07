@@ -23,7 +23,7 @@ public class WriteFile {
 
     public static void main(String[] args) throws Exception {
         // 首先从 FileOutputStream 获取一个通道
-        FileOutputStream fou = new FileOutputStream("doc/writesomebytes.txt");
+        FileOutputStream fou = new FileOutputStream("doc/charbuffer.txt");
         FileChannel fc = fou.getChannel();
 
         // 下一步是创建一个缓冲区并在其中放入一些数据 - 在这里，数据将从一个名为 message 的数组中取出，
