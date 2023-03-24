@@ -12,6 +12,10 @@
 
   <name>thread-study</name>
 
+  <modules>
+    <module>spring-boot-fork-join</module>
+  </modules>
+
   <properties>
   </properties>
 
